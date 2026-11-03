@@ -1,18 +1,1 @@
-# Named non-secret connections, referenced by tools.yaml connection_name.
-# connections:
-#   country_connection:
-#     connector: {category: RDBMS, type: SNOWFLAKE}
-#     configuration:
-#       account: example-account
-#       warehouse: example-warehouse
-#       database: example-database
-#       schema: example-schema
-#       user: example-service-user
-#       authentication:
-#         directPatToken: COUNTRY_CONNECTION_PAT_TOKEN
-#         secret: COUNTRY_CONNECTION_PAT_SECRET_NAME
-# Credentials remain in environment variables or the secrets manager.
-# Populate exactly one authentication option at runtime:
-# - directPatToken: actual PAT value (COUNTRY_CONNECTION_PAT_TOKEN env var)
-# - secret: SecretsManager secret name (COUNTRY_CONNECTION_PAT_SECRET_NAME env var)
 connections: {}

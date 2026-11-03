@@ -275,3 +275,37 @@ agent names.
 Do not edit `graph/graph_builder.py`, `nodes/agent_node_builder.py`,
 `tools/tool_registry.py`, `workflow.py`, `main.py`, model fallback, or tracking for
 ordinary generated workflows.
+
+<!-- BEGIN LANGGRAPH WORKFLOW -->
+# Feedback Analyzer Workflow
+
+This workflow consists of a single agent node named `feedback_analyzer` which analyzes customer feedback text to:
+
+- Classify sentiment as one of Positive, Negative, Neutral, or Mixed.
+- Generate a concise summary explanation clarifying the sentiment classification.
+- Extract up to three key points explicitly mentioned in the feedback.
+
+If the input feedback text is empty or insufficient for analysis, the workflow returns a Neutral sentiment, an explanatory summary, and an empty list of key points.
+
+## Configuration
+
+- Requires environment variables for OpenAI API access as specified in the `agents.yaml` model provider configuration.
+
+## Usage
+
+The workflow starts and ends at the `feedback_analyzer` node with no external tools or additional nodes.
+
+## Input
+
+- `feedback_text` (string): Customer feedback text to analyze.
+
+## Output
+
+- `sentiment` (string): Sentiment classification of the feedback.
+- `summary` (string): Concise summary explanation clarifying the sentiment classification.
+- `key_points` (array of strings): Up to three key points explicitly mentioned in the feedback.
+
+---
+
+This README is auto-generated and maintained by the LangGraph platform.
+<!-- END LANGGRAPH WORKFLOW -->

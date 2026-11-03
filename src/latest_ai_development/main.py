@@ -271,7 +271,7 @@ async def _run_cli_workflow(inputs: dict[str, Any]) -> State:
 
 
 def test() -> None:
-    result = asyncio.run(_run_cli_workflow({"user_input": "Latest AI Agent Frameworks"}))
+    result = asyncio.run(_run_cli_workflow({'feedback_text': 'The product quality is excellent and delivery was fast. However, the packaging was damaged and customer service was unhelpful.'}))
     print(json.dumps(result, ensure_ascii=False, default=str))
 
 

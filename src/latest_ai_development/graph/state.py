@@ -1,50 +1,27 @@
+from typing import TypedDict, NotRequired, Required, Literal
 from copy import deepcopy
-from operator import add
-from typing import Annotated, Any, Required, TypedDict
 
-
-class InputState(TypedDict, total=False):
+class InputState(TypedDict):
     """Public request fields accepted by the workflow."""
+    feedback_text: Required[str]
 
-    user_input: Required[str]
-
-
-class OutputState(TypedDict, total=False):
+class OutputState(TypedDict):
     """Public response fields returned by the workflow."""
-
-    final_response: str
-    errors: Annotated[list[str], add]
-
+    sentiment: Required[Literal['Positive', 'Negative', 'Neutral', 'Mixed']]
+    summary: Required[str]
+    key_points: Required[list[str]]
 
 class State(InputState, OutputState, total=False):
     """Complete state shared by LangGraph nodes."""
+INPUT_FIELDS = ('feedback_text',)
+REQUIRED_INPUT_FIELDS = ('feedback_text',)
+OUTPUT_FIELDS = ('sentiment', 'summary', 'key_points')
+_STATE_DEFAULTS: dict[str, object] = {'key_points': []}
 
-    normalized_feedback: str
-    validation_status: str
-    sentiment: str
-    confidence: str
-    sentiment_reason: str
-    clarification_question: str
-    urgency_score: int
-    policy_risk_score: int
-    draft_response: str
-    policy_guidance: str
-    human_decision: str
-
-
-INPUT_FIELDS = tuple(InputState.__annotations__)
-REQUIRED_INPUT_FIELDS = tuple(
-    field_name for field_name in INPUT_FIELDS if field_name in InputState.__required_keys__
-)
-OUTPUT_FIELDS = tuple(OutputState.__annotations__)
-
-_STATE_DEFAULTS: dict[str, Any] = {
-    "errors": [],
-    "urgency_score": 0,
-    "policy_risk_score": 0,
-}
-
-
-def state_defaults() -> dict[str, Any]:
+def state_defaults() -> dict[str, object]:
     """Return an isolated copy of workflow state defaults for one invocation."""
     return deepcopy(_STATE_DEFAULTS)
+InputState.__required_keys__ = frozenset(['feedback_text'])
+InputState.__optional_keys__ = frozenset([])
+OutputState.__required_keys__ = frozenset(['key_points', 'sentiment', 'summary'])
+OutputState.__optional_keys__ = frozenset([])

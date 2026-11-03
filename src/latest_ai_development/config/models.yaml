@@ -1,37 +1,51 @@
 default_provider: openai
-default_model: gpt-4.1-mini
-
+default_model: gpt-5.4-mini
 providers:
   openai:
     chat_model: gpt-4.1-mini
-    temperature: 0.3
-    top_p: 1.0
-    max_tokens: 2000
+    temperature: 0.0
+    top_p: 0.0
+    max_tokens: 50000
     fallback:
       provider: openai
       chat_model: gpt-4.1-nano
       temperature: 0.3
       top_p: 1.0
       max_tokens: 2000
-
+    models:
+      gpt-5.4-mini:
+        parameters:
+          temperature: 0.0
+          topP: 0.0
+          maxOutputTokens: 50000
+          presencePenalty: 0.0
+          frequencyPenalty: 0.0
+          responseFormat: text
+      gpt-5.4:
+        parameters:
+          temperature: 0.0
+          topP: 0.0
+          maxOutputTokens: 50000
+          presencePenalty: 0.0
+          frequencyPenalty: 0.0
+          responseFormat: text
+    presence_penalty: 0.0
+    frequency_penalty: 0.0
+    response_format: text
   anthropicai:
     chat_model: claude-sonnet-4-6
     temperature: 0.7
     max_tokens: 4000
-
   geminiai:
     chat_model: gemini-2.5-flash
     temperature: 0.7
     max_tokens: 4000
-
   bedrockai:
     chat_model: us.anthropic.claude-opus-5
     max_tokens: 4000
-
   microsoftfoundryai:
     chat_model: claude-sonnet-4-6
     max_tokens: 4000
-
   ollama:
     chat_model: llama3
     temperature: 0.3
